@@ -1,39 +1,41 @@
 import logo from './logo.svg';
 import './App.css';
-import ExpenseItem from './componenets/ExpenseItem.js';
+import Header from "./MyComponent/header";
+import { Todos } from "./MyComponent/Todos";
+import { Footer } from "./MyComponent/Footer";
+import { Addtodo } from "./MyComponent/Addtodo";
+import React, { useState } from 'react';
+
 
 function App() {
-  const expenses = [
-    {
-      id: 'e1',
-      title: 'Toilet Paper',
-      amount: 94.12,
-      date: new Date(2020, 7, 14),
-    },
-    { id: 'e2', title: 'New TV', amount: 799.49, date: new Date(2021, 2, 12) },
-    {
-      id: 'e3',
-      title: 'Car Insurance',
-      amount: 294.67,
-      date: new Date(2021, 2, 28),
-    },
-    {
-      id: 'e4',
-      title: 'New Desk (Wooden)',
-      amount: 450,
-      date: new Date(2021, 5, 12),
-    },
-  ];
-  const LocationOfExpenditure ='pathankot'
+  const ondelete =(todo)=>{
+    // console.log('i am ondelte', todos)
+
+    settodos(todos.filter((e)=>{
+      return e!==todo
+    }))
+  }
+  const [todos, settodos] = useState([
+    {sno:"Todos 1",
+    title:"go to the market",
+    desc:"This is task 1"
+  },
+  {sno:"Todos 2",
+    title:"go to the mall",
+    desc:"This is task 2"
+  },
+  {sno:"Todos 3",
+    title:"go to the home",
+    desc:"This is task 3"
+  }
+  ]);
   return (
-    <header className='App-heade'>
-    <h2>Expense tracker</h2>
-    
-    <ExpenseItem expense={expenses[0]} place={LocationOfExpenditure}></ExpenseItem>
-    <ExpenseItem expense={expenses[1]} place={LocationOfExpenditure}></ExpenseItem>
-    <ExpenseItem expense={expenses[2]} place={LocationOfExpenditure} ></ExpenseItem>
-    <ExpenseItem expense={expenses[3]} place={LocationOfExpenditure}></ExpenseItem>
-    </header>
+    <>
+    <Header title="My_todolist"/>
+    <Addtodo/>
+    <Todos todos={todos} ondelete={ondelete}/>
+    <Footer/>
+    </>
   );
 }
 
